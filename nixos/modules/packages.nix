@@ -12,15 +12,16 @@
     fzf
     gcc
     git
+    home-manager
     imagemagick
     jq
     just
     kitty
-    lsd
-    lazygit
     lazydocker
-    neovim
+    lazygit
+    lsd
     ncdu
+    neovim
     nixfmt-rfc-style
     ripgrep
     stow
