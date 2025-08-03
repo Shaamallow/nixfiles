@@ -6,6 +6,7 @@
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-emoji
+    nerd-fonts.caskaydia-cove
     liberation_ttf
     fira-code
     fira-code-symbols

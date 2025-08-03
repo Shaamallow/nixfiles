@@ -15,6 +15,7 @@
     udiskie
     waybar
     wofi
+    wl-clipboard
     yazi
   ];
 }
