@@ -5,6 +5,7 @@
 
   environment.systemPackages = with pkgs; [
     bat
+    btop
     chezmoi
     dust
     fastfetch
