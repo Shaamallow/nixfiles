@@ -14,13 +14,17 @@
 
   environment.systemPackages = with pkgs; [
     clipse
+    feh
     greetd.tuigreet
+    grim
     hypridle
     hyprlock
     hyprpaper
     hyprpolkitagent
     nautilus
+    playerctl
     rose-pine-hyprcursor
+    slurp
     swww
     udiskie
     waybar
