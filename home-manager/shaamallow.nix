@@ -4,6 +4,8 @@
     ./modules/cli.nix
     ./modules/git.nix
     ./modules/gpu.nix
+    ./applications/discord.nix
+    ./applications/chromium.nix
   ];
 
   home = {
