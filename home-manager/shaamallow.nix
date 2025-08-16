@@ -2,6 +2,7 @@
 {
   imports = [
     ./modules/cli.nix
+    ./modules/gpu.nix
   ];
 
   home = {
