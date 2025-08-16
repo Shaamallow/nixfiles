@@ -2,12 +2,19 @@
 {
   imports = [
     ./modules/cli.nix
+    ./modules/git.nix
     ./modules/gpu.nix
   ];
 
   home = {
     username = "shaamallow";
     homeDirectory = "/home/shaamallow";
+  };
+
+  programs.git = {
+    enable = true;
+    userName = "Shaamallow";
+    userEmail = "eyal.benaroche@gmail.com";
   };
 
   home.sessionVariables = {
