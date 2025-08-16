@@ -17,7 +17,8 @@ rollback:
 
 # Update dotfiles symlinks
 symlink:
-  stow --target=$HOME dotfiles
+  stow --target=$HOME/.config dotfiles
+  stow --dir dotfiles --target=$HOME zsh
 
 # Remove all old nixos & home-manager generations, and collect garbage
 #   home-manager expire-generations "-0 days"
