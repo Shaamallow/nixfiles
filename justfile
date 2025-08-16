@@ -7,6 +7,9 @@ help:
 switch:
   sudo nixos-rebuild switch --flake .
 
+shaamallow:
+  home-manager switch --flake .
+
 # Test a new NixOS generation
 test:
   sudo nixos-rebuild test --flake .#main-laptop
@@ -21,10 +24,9 @@ symlink:
   stow --dir dotfiles --target=$HOME zsh
   stow --dir dotfiles --target=$HOME tmux 
 
-# Remove all old nixos & home-manager generations, and collect garbage
-#   home-manager expire-generations "-0 days"
+# Remove all old nixos & home-manager generations, and collect garbage with home-manager expire-generations "-0 days"
 prune:
-  sudo nix-collect-garbage --delete-old  # Do not forget sudo, else it will not remove the old generations
+  sudo nix-collect-garbage --delete-old
 
 # Update nixpkgs unstable
 update-nixpkgs:

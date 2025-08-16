@@ -15,13 +15,14 @@
   environment.systemPackages = with pkgs; [
     clipse
     feh
-    greetd.tuigreet
+    tuigreet
     grim
     hypridle
     hyprlock
     hyprpaper
     hyprpolkitagent
     nautilus
+    papirus-icon-theme
     playerctl
     rose-pine-hyprcursor
     slurp

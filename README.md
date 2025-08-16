@@ -1,0 +1,3 @@
+# Shaamallow's nix configuration
+
+
