@@ -19,6 +19,7 @@ rollback:
 symlink:
   stow --target=$HOME/.config dotfiles
   stow --dir dotfiles --target=$HOME zsh
+  stow --dir dotfiles --target=$HOME tmux 
 
 # Remove all old nixos & home-manager generations, and collect garbage
 #   home-manager expire-generations "-0 days"
