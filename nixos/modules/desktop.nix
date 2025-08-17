@@ -13,20 +13,22 @@
   };
 
   environment.systemPackages = with pkgs; [
+    adw-gtk3
     clipse
     feh
-    tuigreet
     grim
     hypridle
     hyprlock
     hyprpaper
     hyprpolkitagent
     nautilus
+    nwg-look # because gtk theming is shit, use this tool if necessary
     papirus-icon-theme
     playerctl
     rose-pine-hyprcursor
     slurp
     swww
+    tuigreet
     udiskie
     waybar
     wl-clipboard

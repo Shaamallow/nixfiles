@@ -4,7 +4,8 @@
     ./modules/cli.nix
     ./modules/git.nix
     ./modules/gpu.nix
-    ./applications/discord.nix
+    ./modules/dunst.nix
+    ./applications/communication.nix
     ./applications/chromium.nix
   ];
 

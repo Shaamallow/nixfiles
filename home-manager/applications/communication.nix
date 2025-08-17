@@ -11,5 +11,6 @@ with lib;
   home.packages = with pkgs; [
     discord
     betterdiscordctl
+    signal-desktop
   ];
 }
