@@ -7,7 +7,8 @@
     ./modules/neovim.nix
     ./modules/dunst.nix
     ./applications/communication.nix
-    ./applications/chromium.nix
+    # ./applications/chromium.nix
+    ./applications/nextcloud.nix
   ];
 
   home = {
