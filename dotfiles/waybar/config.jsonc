@@ -16,10 +16,10 @@
     "memory",
     // "temperature",
     "disk",
-    "custom/updates",
   ],
   "modules-center": ["mpris"],
   "modules-right": [
+    "tray",
     "custom/notifications",
     "pulseaudio",
     "backlight",
@@ -87,6 +87,9 @@
     "format": "{}",
     "separate-outputs": true,
     "max-length": 35,
+  },
+  "tray" :{
+    "on-click": "",
   },
   "network": {
     // this needs an extensive rework

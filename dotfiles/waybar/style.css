@@ -132,6 +132,12 @@
   font-weight: bold;
 }
 
+#tray {
+  font-size: 1em;
+  padding: 0px;
+  margin: 0px;
+}
+
 /* All hoverable elements */
 #bluetooth:hover,
 #network:hover,
