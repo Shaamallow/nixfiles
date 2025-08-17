@@ -1,5 +1,5 @@
 # Nix cache sources
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   nix.settings = {
     substituters = [

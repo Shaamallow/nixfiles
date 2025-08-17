@@ -1,7 +1,13 @@
-{ config, pkgs, ... }:
 {
+  pkgs,
+  ...
+}:
+{
+  nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = with pkgs; [
+  home.packages = with pkgs; [
+    neovim
+
     # Nix setup
     nil
     nixfmt-rfc-style

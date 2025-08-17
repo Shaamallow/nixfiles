@@ -1,9 +1,10 @@
-{ config, pkgs, ... }:
+{ ... }:
 {
   imports = [
     ./modules/cli.nix
     ./modules/git.nix
     ./modules/gpu.nix
+    ./modules/neovim.nix
     ./modules/dunst.nix
     ./applications/communication.nix
     ./applications/chromium.nix

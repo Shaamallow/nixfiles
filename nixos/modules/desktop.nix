@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   programs.hyprland = {
     enable = true;
@@ -34,5 +34,6 @@
     wl-clipboard
     wofi
     yazi
+    zathura
   ];
 }

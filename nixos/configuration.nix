@@ -14,7 +14,6 @@
     ./modules/display-manager.nix
     ./modules/fonts.nix
     ./modules/packages.nix
-    ./modules/temp.nix
     ./modules/users.nix
   ];
 
