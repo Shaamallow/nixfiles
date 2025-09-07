@@ -3,6 +3,11 @@
   ...
 }:
 {
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
   # Basic CLI I want available on my user
   home.packages = with pkgs; [
     bat

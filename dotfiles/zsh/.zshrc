@@ -97,4 +97,5 @@ fi
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+eval "$(direnv hook zsh)"
 # source /usr/share/nvm/init-nvm.sh
