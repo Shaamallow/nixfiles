@@ -19,5 +19,8 @@
 
     # Markdown
     marksman
+
+    # Yaml
+    taplo
   ];
 }

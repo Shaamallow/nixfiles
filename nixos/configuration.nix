@@ -37,6 +37,7 @@
   time.timeZone = "Europe/Paris";
 
   programs.firefox.enable = true;
+  programs.nix-ld.enable = true;
 
   # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
   system.stateVersion = "25.05";

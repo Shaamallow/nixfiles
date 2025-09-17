@@ -6,9 +6,14 @@
     ./modules/gpu.nix
     ./modules/neovim.nix
     ./modules/dunst.nix
+
     ./applications/communication.nix
     # ./applications/chromium.nix
     ./applications/nextcloud.nix
+
+    ./languages/c-cpp.nix
+    ./languages/node.nix
+    ./languages/rust.nix
   ];
 
   home = {

@@ -36,37 +36,60 @@
       ];
 
       forAllSystems = nixpkgs.lib.genAttrs systems;
+      overlays = import ./overlays { inherit inputs; };
     in
     {
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
-      overlays = import ./overlays { inherit inputs; };
 
       # add devshell here later
       nixosConfigurations = {
         nixmaster = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = { inherit inputs outputs overlays; };
           modules = [
             ./nixos/configuration.nix
             nixos-hardware.nixosModules.framework-13th-gen-intel
           ];
         };
       };
-
       homeConfigurations = {
         "shaamallow@nixmaster" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            ./home-manager/shaamallow.nix
-          ];
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+            overlays = overlays.unstable;
+          };
+          extraSpecialArgs = {
+            inherit inputs outputs overlays;
+            stable-pkgs = import nixpkgs-stable {
+              system = "x86_64-linux";
+              config.allowUnfree = true;
+              overlays = overlays.stable;
+            };
+            system = "x86_64-linux";
+            darwin = false;
+          };
+          modules = [ ./home-manager/shaamallow.nix ];
         };
+
         "eyalb@bobby" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            ./home-manager/eyalb.nix
-          ];
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+            overlays = overlays.unstable;
+          };
+          extraSpecialArgs = {
+            inherit inputs outputs overlays;
+            stable-pkgs = import nixpkgs-stable {
+              system = "x86_64-linux";
+              config.allowUnfree = true;
+              overlays = overlays.stable;
+            };
+            system = "x86_64-linux";
+            darwin = false;
+          };
+          modules = [ ./home-manager/eyalb.nix ];
         };
       };
     };
+
 }
