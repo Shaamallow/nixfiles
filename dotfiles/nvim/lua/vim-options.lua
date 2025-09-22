@@ -27,6 +27,10 @@ vim.keymap.set('v', '<leader>y', [["+y]])
 -- Remove highlights
 vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
 
+-- Visual mode indent remaps (add these lines)
+vim.keymap.set('v', '<', '<gv')
+vim.keymap.set('v', '>', '>gv')
+
 vim.wo.relativenumber = true
 vim.wo.number = true
 vim.g.autoformat = true
