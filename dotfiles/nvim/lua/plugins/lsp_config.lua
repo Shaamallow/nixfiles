@@ -35,15 +35,15 @@ return {
       -- LSP CONFIGURATION
       -- List of LSP servers to install + configurations
       local servers = {
-        texlab = {
-          settings = {
-            texlab = {
-              diagnostics = {
-                ignoredPatterns = { 'Overfull', 'Underfull' },
-              },
-            },
-          },
-        },
+        -- texlab = {
+        --   settings = {
+        --     texlab = {
+        --       diagnostics = {
+        --         ignoredPatterns = { 'Overfull', 'Underfull' },
+        --       },
+        --     },
+        --   },
+        -- },
         lua_ls = true,
         rust_analyzer = true,
         bashls = {
@@ -64,14 +64,6 @@ return {
         eslint = true,
         html = true,
         -- htmx = true,
-        jsonls = {
-          settings = {
-            json = {
-              schemas = require('schemastore').json.schemas(),
-              validate = { enable = true },
-            },
-          },
-        },
         marksman = true,
         pyright = true,
         svelte = true,
@@ -103,10 +95,9 @@ return {
             },
           },
         },
-        nil_ls = true,
+        -- nil_ls = true,
       }
 
-      local lspconfig = require('lspconfig')
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
       capabilities.textDocument.foldingRange = {
         dynamicRegistration = false,
@@ -119,7 +110,8 @@ return {
           ---@diagnostic disable-next-line: redefined-local
           local config = (config == true) and {} or config
           config = vim.tbl_deep_extend('force', { capabilities = capabilities, on_attach = on_attach }, config)
-          lspconfig[lsp].setup(config)
+          vim.lsp.config(lsp, config)
+          vim.lsp.enable(lsp)
         end
       end
 
