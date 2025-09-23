@@ -1,0 +1,22 @@
+// Place your key bindings in this file to override the defaults
+[
+  {
+    "key": "cmd+b",
+    "command": "workbench.action.toggleSidebarVisibility"
+    // "command": "outline.toggleVisibility"
+  },
+  {
+    "key": "cmd+e",
+    "command": "outline.toggleVisibility"
+  },
+  {
+    "key": "escape",
+    "command": "extension.vim_escape",
+    "when": "editorTextFocus && vim.active && !inDebugRepl"
+  },
+  {
+    "key": "escape",
+    "command": "notebook.cell.quitEdit",
+    "when": "inputFocus && notebookEditorFocused && vim.active && !editorHasSelection && !editorHoverVisible && vim.mode == 'Normal'"
+  }
+]
