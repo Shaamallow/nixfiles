@@ -44,6 +44,10 @@ return {
             return { 'ruff_organize_imports', 'ruff_format' }
           end
 
+          if content:find('tool%.ruff%.lint') then
+            return { 'ruff_organize_imports', 'ruff_format' }
+          end
+
           return default
         end,
         rust = { 'rustfmt' },
