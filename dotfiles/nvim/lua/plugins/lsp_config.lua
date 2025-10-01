@@ -106,7 +106,6 @@ return {
         nil_ls = true,
       }
 
-      local lspconfig = require('lspconfig')
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
       capabilities.textDocument.foldingRange = {
         dynamicRegistration = false,
@@ -119,7 +118,8 @@ return {
           ---@diagnostic disable-next-line: redefined-local
           local config = (config == true) and {} or config
           config = vim.tbl_deep_extend('force', { capabilities = capabilities, on_attach = on_attach }, config)
-          lspconfig[lsp].setup(config)
+          vim.lsp.config(lsp, config)
+          vim.lsp.enable(lsp)
         end
       end
 
