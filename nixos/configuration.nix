@@ -34,7 +34,8 @@
     enableOnBoot = false;
   };
 
-  time.timeZone = "Europe/Paris";
+  # time.timeZone = "Europe/Paris";
+  time.timeZone = "Asia/Tokyo";
 
   programs.firefox.enable = true;
   programs.nix-ld.enable = true;
