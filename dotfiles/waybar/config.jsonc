@@ -212,8 +212,8 @@
     "escape": true,
   },
   "clock": {
-    // "timezone": "Europe/Paris",
-    "timezone": "Asia/Tokyo",
+    "timezone": "Europe/Paris",
+    // "timezone": "Asia/Tokyo",
     "format": " {:%d/%m <small>%a</small> %H:%M}",
     //"format": " {:%a %b %d %Y | %H:%M}",
     "format-alt": " {:%A %B %d %Y (%V) | %r}",
