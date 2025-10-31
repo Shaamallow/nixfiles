@@ -23,8 +23,10 @@
 
   programs.git = {
     enable = true;
-    userName = "Shaamallow";
-    userEmail = "eyal.benaroche@gmail.com";
+    settings = {
+      user.name = "Shaamallow";
+      user.email = "eyal.benaroche@gmail.com";
+    };
   };
 
   home.sessionVariables = {
