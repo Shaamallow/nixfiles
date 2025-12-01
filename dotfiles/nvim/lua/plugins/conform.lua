@@ -6,6 +6,16 @@ return {
   -- Lazy load conform
   event = { 'BufWritePre' },
   cmd = { 'ConformInfo', 'FormatToggle' },
+  keys = {
+    {
+      '<leader>ff',
+      function()
+        require('conform').format({ async = true, lsp_fallback = true })
+      end,
+      mode = '',
+      desc = 'Format Buffer',
+    },
+  },
   config = function()
     local conform = require('conform')
     conform.setup({
@@ -85,6 +95,8 @@ return {
     local function show_notification(message, level)
       notify(message, level, { title = 'conform.nvim' })
     end
+    -- Formatexpr
+    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
     -- Add a command to toggle formatting on save on or off
     vim.api.nvim_create_user_command('FormatToggle', function(args)

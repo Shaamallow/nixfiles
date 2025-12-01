@@ -22,7 +22,7 @@ local on_attach = function(_, bufnr)
   end, { buffer = bufnr, desc = 'Hover' })
   vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = 'Code Action' })
   vim.keymap.set('n', 'gi', builtin.lsp_implementations, { buffer = bufnr, desc = 'Implementations' })
-  vim.keymap.set('n', '<leader>ff', vim.lsp.buf.format, { buffer = bufnr, desc = 'Format' })
+  -- vim.keymap.set('n', '<leader>ff', vim.lsp.buf.format, { buffer = bufnr, desc = 'Format' })
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = bufnr, desc = 'Rename' })
 end
 
@@ -73,7 +73,7 @@ return {
           },
         },
         marksman = true,
-        pyright = true,
+        pyrefly = true,
         svelte = true,
         taplo = true, --toml
         tailwindcss = false,
@@ -127,7 +127,7 @@ return {
       vim.keymap.set(
         'n',
         '<leader>rp',
-        '<CMD>LspRestart pyright<CR>',
+        '<CMD>LspRestart pyrefly<CR>',
         { silent = true, desc = 'Restart Pyright', noremap = true }
       )
       vim.keymap.set(
