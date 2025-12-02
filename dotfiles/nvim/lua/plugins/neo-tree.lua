@@ -47,11 +47,11 @@ return {
 
         { noremap = true, silent = true, desc = 'Toggle document_symbols tree' },
       },
-      {
-        '<leader>bf',
-        ':Neotree buffers reveal float<CR>',
-        { noremap = true, silent = true, desc = 'Toggle buffer map' },
-      },
+      -- {
+      --   '<leader>bf',
+      --   ':Neotree buffers reveal float<CR>',
+      --   { noremap = true, silent = true, desc = 'Toggle buffer map' },
+      -- },
     },
   },
   {
@@ -71,13 +71,16 @@ return {
         view_options = {
           show_hidden = true,
         },
+        float = {
+          border = 'rounded',
+        },
       })
 
       -- Open parent directory in current window
       vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 
       -- Open parent directory in floating window
-      vim.keymap.set('n', '<space>-', require('oil').toggle_float)
+      vim.keymap.set('n', '<leader>-', require('oil').toggle_float)
     end,
   },
 }

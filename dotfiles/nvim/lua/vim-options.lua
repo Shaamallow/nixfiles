@@ -19,7 +19,7 @@ vim.keymap.set('n', 'H', ':bprev<CR>')
 vim.keymap.set('n', 'L', ':bnext<CR>')
 
 -- Force formatting
-vim.keymap.set('n', '<leader>ff', '<cmd>lua vim.lsp.buf.format()<CR>')
+-- vim.keymap.set('n', '<leader>ff', '<cmd>lua vim.lsp.buf.format()<CR>')
 
 -- Yank to clipboard
 vim.keymap.set('v', '<leader>y', [["+y]])

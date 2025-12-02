@@ -95,7 +95,7 @@ return {
     local function show_notification(message, level)
       notify(message, level, { title = 'conform.nvim' })
     end
-    -- Formatexpr
+    -- formatexpr
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
     -- Add a command to toggle formatting on save on or off

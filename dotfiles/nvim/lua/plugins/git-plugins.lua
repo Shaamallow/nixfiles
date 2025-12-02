@@ -7,6 +7,11 @@ return {
         '<leader>gp',
         ':Gitsigns preview_hunk<CR>',
       },
+      {
+        '<leader>gb',
+        ':Gitsigns blame<CR>',
+        desc = 'git blame',
+      },
     },
     opts = {
       preview_config = {

@@ -20,10 +20,14 @@ local on_attach = function(_, bufnr)
   vim.keymap.set('n', 'K', function()
     vim.lsp.buf.hover({ border = 'rounded', max_height = 25, max_width = 120 })
   end, { buffer = bufnr, desc = 'Hover' })
+
+  vim.keymap.set('n', '<leader>cd', function()
+    vim.diagnostic.open_float({ border = 'rounded', max_height = 25, max_width = 120 })
+  end, { buffer = bufnr, desc = 'Line Diagnostics' })
   vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = 'Code Action' })
   vim.keymap.set('n', 'gi', builtin.lsp_implementations, { buffer = bufnr, desc = 'Implementations' })
   -- vim.keymap.set('n', '<leader>ff', vim.lsp.buf.format, { buffer = bufnr, desc = 'Format' })
-  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = bufnr, desc = 'Rename' })
+  vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename, { buffer = bufnr, desc = 'Rename' })
 end
 
 return {
@@ -128,7 +132,7 @@ return {
         'n',
         '<leader>rp',
         '<CMD>LspRestart pyrefly<CR>',
-        { silent = true, desc = 'Restart Pyright', noremap = true }
+        { silent = true, desc = 'Restart Pyrefly', noremap = true }
       )
       vim.keymap.set(
         'n',
