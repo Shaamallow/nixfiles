@@ -77,6 +77,7 @@ return {
           },
         },
         marksman = true,
+        -- ty = true,
         pyrefly = true,
         svelte = true,
         taplo = true, --toml
@@ -128,11 +129,17 @@ return {
       end
 
       -- Some keymaps to reload common language servers
+      -- vim.keymap.set(
+      --   'n',
+      --   '<leader>rp',
+      --   '<CMD>LspRestart ty<CR>',
+      --   { silent = true, desc = 'Restart ty', noremap = true }
+      -- )
       vim.keymap.set(
         'n',
         '<leader>rp',
         '<CMD>LspRestart pyrefly<CR>',
-        { silent = true, desc = 'Restart Pyrefly', noremap = true }
+        { silent = true, desc = 'Restart pyrefly', noremap = true }
       )
       vim.keymap.set(
         'n',

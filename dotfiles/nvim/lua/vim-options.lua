@@ -34,3 +34,9 @@ vim.keymap.set('v', '>', '>gv')
 vim.wo.relativenumber = true
 vim.wo.number = true
 vim.g.autoformat = true
+
+vim.api.nvim_create_user_command('Cppath', function()
+  local path = vim.fn.expand('%:p')
+  vim.fn.setreg('+', path)
+  vim.notify('Copied "' .. path .. '" to the clipboard!')
+end, {})

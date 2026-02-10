@@ -12,6 +12,11 @@ return {
         ':Gitsigns blame<CR>',
         desc = 'git blame',
       },
+      {
+        '<leader>gr',
+        ':Gitsigns reset_hunk<CR>',
+        desc = 'git reset hunk',
+      },
     },
     opts = {
       preview_config = {
