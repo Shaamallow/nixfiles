@@ -11,6 +11,7 @@
   # Basic CLI I want available on my user
   home.packages = with pkgs; [
     bat
+    dig
     cachix
     cmatrix
     delta
