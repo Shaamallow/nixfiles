@@ -10,48 +10,35 @@ return {
     opts = {
       sources = { 'filesystem', 'buffers', 'document_symbols' },
       close_if_last_window = true,
-      default_component_configs = {
-        indent = {
-          with_markers = true,
-          indent_marker = '│',
-          last_indent_marker = '╰',
-          with_expanders = true,
-        },
-      },
       window = {
         mappings = {
-          -- Convenient mappings for navigation with j-k
-          ['h'] = 'toggle_node',
-          ['l'] = 'close_all_subnodes',
+          ['<space>'] = 'none',
+          ['h'] = 'close_node', -- Fold
+          ['l'] = 'open', -- Expand
+          -- CUSTOM: Press 'A' to Harpoon the file under cursor
+          ['A'] = function(state)
+            local node = state.tree:get_node()
+            require('harpoon'):list():add({
+              value = node.path,
+              context = { row = 1, col = 0 },
+            })
+            vim.notify('󱡀 Harpooned: ' .. node.name)
+          end,
         },
       },
       filesystem = {
         use_libuv_file_watcher = true,
+        follow_current_file = { enabled = true },
         filtered_items = {
           hide_dotfiles = false,
           hide_gitignored = false,
-          hide_by_name = { '.git', 'venv', '.venv', 'node_modules', '__pycache__' },
+          hide_by_name = { '.git', 'venv', 'node_modules' },
         },
-        follow_current_file = { enabled = true },
       },
     },
     keys = {
-      {
-        '<leader>e',
-        ':Neotree filesystem reveal left toggle<CR>',
-        { noremap = true, silent = true, desc = 'Toggle file tree' },
-      },
-      {
-        '<leader>fe',
-        ':Neotree document_symbols reveal left toggle<CR>',
-
-        { noremap = true, silent = true, desc = 'Toggle document_symbols tree' },
-      },
-      -- {
-      --   '<leader>bf',
-      --   ':Neotree buffers reveal float<CR>',
-      --   { noremap = true, silent = true, desc = 'Toggle buffer map' },
-      -- },
+      { '<leader>e', '<cmd>Neotree filesystem toggle left<cr>', desc = 'Explorer' },
+      { '<leader>fs', '<cmd>Neotree document_symbols toggle left<cr>', desc = 'Document Symbols' },
     },
   },
   {

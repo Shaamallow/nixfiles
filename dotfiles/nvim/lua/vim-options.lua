@@ -9,14 +9,11 @@ vim.cmd('set nowrap')
 vim.opt.conceallevel = 1
 
 -- Navigate vim panes better
-vim.keymap.set('n', '<c-k>', ':wincmd k<CR>')
-vim.keymap.set('n', '<c-j>', ':wincmd j<CR>')
-vim.keymap.set('n', '<c-h>', ':wincmd h<CR>')
-vim.keymap.set('n', '<c-l>', ':wincmd l<CR>')
-
--- Navigate vim buffers
-vim.keymap.set('n', 'H', ':bprev<CR>')
-vim.keymap.set('n', 'L', ':bnext<CR>')
+-- Handled by tmux.lua
+-- vim.keymap.set('n', '<c-k>', ':wincmd k<CR>')
+-- vim.keymap.set('n', '<c-j>', ':wincmd j<CR>')
+-- vim.keymap.set('n', '<c-h>', ':wincmd h<CR>')
+-- vim.keymap.set('n', '<c-l>', ':wincmd l<CR>')
 
 -- Force formatting
 -- vim.keymap.set('n', '<leader>ff', '<cmd>lua vim.lsp.buf.format()<CR>')
@@ -40,3 +37,14 @@ vim.api.nvim_create_user_command('Cppath', function()
   vim.fn.setreg('+', path)
   vim.notify('Copied "' .. path .. '" to the clipboard!')
 end, {})
+
+-- Diff keymap
+vim.keymap.set('n', '<leader>dt', function()
+  if vim.wo.diff then
+    vim.cmd('windo diffoff')
+    vim.notify('Diff mode OFF')
+  else
+    vim.cmd('windo diffthis')
+    vim.notify('Diff mode ON')
+  end
+end, { desc = 'Toggle Diff in all windows' })
