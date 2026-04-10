@@ -5,8 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Created by newuser for 5.9
-
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -29,7 +27,20 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
 # Load completions
-autoload -Uz compinit && compinit
+# Optimize compinit with a 24-hour cache check
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.m-1) ]]; then
+  # -C skips security checks; it's much faster
+  compinit -C
+else
+  compinit
+fi
+
+autoload -U edit-command-line
+zle -N edit-command-line
+
+# Bind the shortcut
+bindkey '^x^e' edit-command-line
 
 zinit cdreplay -q
 
@@ -55,7 +66,10 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
+export EDITOR='nvim'
+
 # Completion styling
+zstyle ':completion:*' use-cache yes
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
@@ -63,39 +77,77 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
-alias ls='lsd --group-directories-first'
-alias vim='nvim'
+alias ls="ls --color=auto --group-directories-first"
+alias ll="ls -l --color=auto --group-directories-first"
 alias lg="lazygit"
-alias fzf-find="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
-alias tma="tmux a"
-alias neofetch="fastfetch"
+alias vim="nvim"
+alias tma='tmux a'
+alias vim-find='nvim $(fzf --preview="bat --color=always {}")'
+alias bat-find='bat $(fzf --preview="bat --color=always {}")'
+alias fzf-find='fzf --preview="bat --color=always {}"'
+alias turms='turm --user $USER --slurm-refresh 30'
 
-export EDITOR='nvim'
+function rgfzf {
+  local search=""
+  if [[ $# -gt 0 ]]; then
+    search="$1"
+    shift
+  fi
+  command rg --color=always --line-number --no-heading --smart-case "$@" "$search" \
+  | command fzf -d':' --ansi \
+    --preview "command bat -p --color=always {1} --highlight-line {2}" \
+    --preview-window ~8,+{2}-5 \
+  | awk -F':' '{print $1}'
+}
 
-# Path
-path=('/home/shaamallow/.cargo/bin' $path)
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/shaamallow/.miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'micromamba shell init' !!
+export MAMBA_EXE='/storage/home/ebenaroche/.local/bin/micromamba';
+export MAMBA_ROOT_PREFIX='/storage/home/ebenaroche/.micromamba';
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
 if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
+    eval "$__mamba_setup"
 else
-    if [ -f "/home/shaamallow/.miniforge3/etc/profile.d/conda.sh" ]; then
-        . "/home/shaamallow/.miniforge3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/shaamallow/.miniforge3/bin:$PATH"
-    fi
+    alias micromamba="$MAMBA_EXE"  # Fallback on help from micromamba activate
 fi
-unset __conda_setup
+unset __mamba_setup
+# <<< mamba initialize <<<
 
-if [ -f "/home/shaamallow/.miniforge3/etc/profile.d/mamba.sh" ]; then
-    . "/home/shaamallow/.miniforge3/etc/profile.d/mamba.sh"
-fi
-# <<< conda initialize <<<
+# Then Add .local/bin with higher priority to path
+
+path=('/home/ebenaroche/.micromamba/envs/global_tools/bin' $path)
+path=('/home/ebenaroche/.local/bin' $path)
 
 # Shell integrations
-eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
-eval "$(direnv hook zsh)"
-# source /usr/share/nvm/init-nvm.sh
+eval "$(fzf --zsh)"
+
+# Lazy load NVM
+export NVM_DIR="$HOME/.nvm"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  # Create functions that intercept the first call
+  nvm() {
+    unset -f nvm node npm npx
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+    nvm "$@"
+  }
+  node() {
+    unset -f nvm node npm npx
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    node "$@"
+  }
+  npm() {
+    unset -f nvm node npm npx
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    npm "$@"
+  }
+  npx() {
+    unset -f nvm node npm npx
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    npx "$@"
+  }
+fi
+
+[ -f "/home/ebenaroche/code/fairvit/scripts/slurm_utils.sh" ] && source /home/ebenaroche/code/fairvit/scripts/slurm_utils.sh
