@@ -29,7 +29,20 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
 # Load completions
-autoload -Uz compinit && compinit
+# Optimize compinit with a 24-hour cache check
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.m-1) ]]; then
+  # -C skips security checks; it's much faster
+  compinit -C
+else
+  compinit
+fi
+
+autoload -U edit-command-line
+zle -N edit-command-line
+
+# Bind the shortcut
+bindkey '^x^e' edit-command-line
 
 zinit cdreplay -q
 
@@ -56,6 +69,7 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 
 # Completion styling
+zstyle ':completion:*' use-cache yes
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
