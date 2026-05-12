@@ -1,0 +1,88 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+$os\
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$line_break\
+$character"""
+
+right_format = """
+$conda\
+$python
+$cmd_duration\
+"""
+
+[os]
+format = "[$symbol]($style) "
+style = "bold white"
+disabled = false
+
+# You can customize the icons for your specific operating systems here.
+# These use standard Nerd Font icons.
+[os.symbols]
+Macos = " "
+Windows = "󰍲 "
+Ubuntu = " "
+Debian = " "
+Arch = " "
+Mint = " "
+Fedora = " "
+CentOS = " "
+Linux = " "
+Raspbian = " "
+
+[directory]
+style = "blue"
+# Added a folder icon before the path, and a lock icon if the directory is read-only
+format = "[ $path]($style)[$read_only]($read_only_style) "
+read_only = " "
+
+[character]
+success_symbol = "[❯](purple)"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](green)"
+
+[git_branch]
+# Added the classic git branch icon
+format = "[ $branch]($style) "
+style = "green"
+
+[git_status]
+# Removed the overarching color wrapper so individual colors can shine
+format = "$conflicted$untracked$modified$staged$renamed$deleted$ahead_behind$stashed"
+style = "cyan"
+conflicted = "[🏳 ](bold red)"
+untracked = "[ ](bright-blue)"
+modified = "[ ](yellow)"
+staged = "[ ](green)"
+renamed = "[ ](purple)"
+deleted = "[ ](red)"
+stashed = "[ ](cyan)"
+ahead = "[⇡ ](green)"
+behind = "[⇣ ](red)"
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bright-black"
+
+[cmd_duration]
+# Added the hourglass icon for command execution time
+format = "[ $duration]($style) "
+style = "yellow"
+
+[python]
+# Added the Python logo icon
+format = "[ $virtualenv]($style) "
+style = "teal"
+detect_extensions = []
+detect_files = []
+
+[conda]
+format = "[ $environment]($style)"
+style = 'green'
+ignore_base = true
