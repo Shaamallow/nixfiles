@@ -142,4 +142,5 @@ fi
 [ -f "/home/ebenaroche/code/fairvit/scripts/slurm_utils.sh" ] && source /home/ebenaroche/code/fairvit/scripts/slurm_utils.sh
 
 # Initialize Starship
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
 eval "$(starship init zsh)"
