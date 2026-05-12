@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -17,9 +10,6 @@ fi
 # Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Add in Powerlevel10k
-zinit ice depth=1; zinit light romkatv/powerlevel10k
-
 # Add in zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
@@ -28,6 +18,8 @@ zinit light Aloxaf/fzf-tab
 
 # Load completions
 # Optimize compinit with a 24-hour cache check
+# Zsh manual completions (rustup)
+fpath+=~/.zfunc
 autoload -Uz compinit
 if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.m-1) ]]; then
   # -C skips security checks; it's much faster
@@ -43,9 +35,6 @@ zle -N edit-command-line
 bindkey '^x^e' edit-command-line
 
 zinit cdreplay -q
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Keybindings
 bindkey -e
@@ -77,8 +66,8 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
-alias ls="ls --color=auto --group-directories-first"
-alias ll="ls -l --color=auto --group-directories-first"
+alias ls="lsd --color=auto --group-directories-first"
+alias ll="lsd -l --color=auto --group-directories-first"
 alias lg="lazygit"
 alias vim="nvim"
 alias tma='tmux a'
@@ -151,3 +140,6 @@ if [ -s "$NVM_DIR/nvm.sh" ]; then
 fi
 
 [ -f "/home/ebenaroche/code/fairvit/scripts/slurm_utils.sh" ] && source /home/ebenaroche/code/fairvit/scripts/slurm_utils.sh
+
+# Initialize Starship
+eval "$(starship init zsh)"
