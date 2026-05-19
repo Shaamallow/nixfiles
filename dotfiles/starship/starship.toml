@@ -2,8 +2,6 @@
 
 format = """
 $os\
-$username\
-$hostname\
 $directory\
 $git_branch\
 $git_state\
@@ -12,8 +10,8 @@ $line_break\
 $character"""
 
 right_format = """
+$python\
 $conda\
-$python
 $cmd_duration\
 """
 
@@ -78,7 +76,7 @@ style = "yellow"
 [python]
 # Added the Python logo icon
 format = "[ $virtualenv]($style) "
-style = "teal"
+style = "fg:#07BABA"
 detect_extensions = []
 detect_files = []
 
