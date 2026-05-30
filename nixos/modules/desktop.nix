@@ -28,7 +28,7 @@
     playerctl
     rose-pine-hyprcursor
     slurp
-    swww
+    awww
     tuigreet
     udiskie
     waybar

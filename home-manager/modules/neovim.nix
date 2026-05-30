@@ -10,7 +10,7 @@
 
     # Nix setup
     nil
-    nixfmt-rfc-style
+    nixfmt
 
     # Lua setup
     lua5_4_compat

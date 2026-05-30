@@ -23,7 +23,7 @@
     lsd
     ncdu
     neovim
-    nixfmt-rfc-style
+    nixfmt
     ripgrep
     stow
     tldr
