@@ -91,14 +91,14 @@ function rgfzf {
 
 
 # >>> mamba initialize >>>
-# !! Contents within this block are managed by 'micromamba shell init' !!
-export MAMBA_EXE='/storage/home/ebenaroche/.local/bin/micromamba';
-export MAMBA_ROOT_PREFIX='/storage/home/ebenaroche/.micromamba';
+# !! Contents within this block are managed by 'mamba shell init' !!
+export MAMBA_EXE='/opt/homebrew/opt/micromamba/bin/mamba';
+export MAMBA_ROOT_PREFIX='/Users/ebenaroche/mamba';
 __mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__mamba_setup"
 else
-    alias micromamba="$MAMBA_EXE"  # Fallback on help from micromamba activate
+    alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
 fi
 unset __mamba_setup
 # <<< mamba initialize <<<
@@ -106,41 +106,16 @@ unset __mamba_setup
 # Then Add .local/bin with higher priority to path
 
 path=('/home/ebenaroche/.micromamba/envs/global_tools/bin' $path)
-path=('/home/ebenaroche/.local/bin' $path)
+path=('/Users/ebenaroche/.local/bin' $path)
 
 # Shell integrations
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(fzf --zsh)"
 
-# Lazy load NVM
-export NVM_DIR="$HOME/.nvm"
-if [ -s "$NVM_DIR/nvm.sh" ]; then
-  # Create functions that intercept the first call
-  nvm() {
-    unset -f nvm node npm npx
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-    nvm "$@"
-  }
-  node() {
-    unset -f nvm node npm npx
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    node "$@"
-  }
-  npm() {
-    unset -f nvm node npm npx
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    npm "$@"
-  }
-  npx() {
-    unset -f nvm node npm npx
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    npx "$@"
-  }
-fi
+eval "$(fnm env --use-on-cd)"
 
 [ -f "/home/ebenaroche/code/fairvit/scripts/slurm_utils.sh" ] && source /home/ebenaroche/code/fairvit/scripts/slurm_utils.sh
 
-# Initialize Starship
+# # Initialize Starship
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 eval "$(starship init zsh)"
