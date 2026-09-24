@@ -109,7 +109,9 @@ path=('/home/ebenaroche/.micromamba/envs/global_tools/bin' $path)
 path=('/Users/ebenaroche/.local/bin' $path)
 
 # Shell integrations
-eval "$(zoxide init --cmd cd zsh)"
+if [[ $- == *i* ]]; then
+  eval "$(zoxide init --cmd cd zsh)"
+fi
 eval "$(fzf --zsh)"
 
 eval "$(fnm env --use-on-cd)"
